@@ -118,7 +118,7 @@ src/
 │   │   └── Favorite.ts             # Favorite Mongoose schema
 │   ├── types/index.ts              # All TypeScript interfaces and DTOs
 │   ├── globals.css                 # Global styles + Tailwind + HeroUI
-│   ├── layout.tsx                  # Root layout (providers, anti-FOUC script)
+│   ├── layout.tsx                  # Root layout (providers, theme script)
 │   └── page.tsx                    # Home page — recipe catalog
 │
 ├── components/
@@ -278,7 +278,7 @@ All endpoints return `{ success: true, data: ... }` on success or `{ error: "...
 
 ## Environment Variables
 
-Create a `.env.local` file at the project root:
+Create a `.env` file at the project root:
 
 ```env
 # MongoDB
@@ -308,14 +308,8 @@ MAIL_PASS=your_email_password
 ### Installation
 
 ```bash
-# Install dependencies
 npm install
-
-# Start the development server
-npm run dev
 ```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Seed the database
 
@@ -324,6 +318,14 @@ npm run seed
 ```
 
 Populates the `recipes` collection with sample data from `src/app/lib/mockData.ts`.
+
+### Development
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ### Build for production
 
