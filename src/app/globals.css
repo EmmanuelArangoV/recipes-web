@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@import "@heroui/styles";
+
+:root {
+  --background: #faf0d7;
+  --foreground: #1a3a8c;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body), Nunito, sans-serif;
+}
+
+/* Smooth theme transitions — applied after first paint to avoid flash */
+.theme-ready *,
+.theme-ready *::before,
+.theme-ready *::after {
+  transition-property: background-color, border-color, color;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), "Playfair Display", serif;
+}
