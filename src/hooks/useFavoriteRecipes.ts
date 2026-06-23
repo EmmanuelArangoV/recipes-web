@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import favoriteService from '@/services/favoriteService';
-import type { RecipeSummaryDTO } from '@/app/types';
+import type { RecipeSummaryDTO, FavoritePopulatedDTO } from '@/app/types';
 
 export function useFavoriteRecipes() {
   const [recipes, setRecipes] = useState<RecipeSummaryDTO[]>([]);
@@ -14,14 +14,16 @@ export function useFavoriteRecipes() {
     favoriteService
       .getAll()
       .then((res) => {
-        const mapped: RecipeSummaryDTO[] = res.data.data.map((f: any) => ({
-          id: f.recipeId._id,
-          title: f.recipeId.title,
-          image: f.recipeId.image,
-          prepTime: f.recipeId.prepTime,
-          difficulty: f.recipeId.difficulty,
-          description: f.recipeId.description,
-        }));
+        const mapped: RecipeSummaryDTO[] = res.data.data
+          .filter((f: FavoritePopulatedDTO) => f.recipeId)
+          .map((f: FavoritePopulatedDTO) => ({
+            id: f.recipeId._id,
+            title: f.recipeId.title,
+            image: f.recipeId.image,
+            prepTime: f.recipeId.prepTime,
+            difficulty: f.recipeId.difficulty,
+            description: f.recipeId.description,
+          }));
         setRecipes(mapped);
         setFavoriteIds(new Set(mapped.map((r) => r.id)));
       })

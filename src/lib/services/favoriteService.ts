@@ -14,7 +14,7 @@ export async function addFavorite(userId: string, recipeId: string) {
   return Favorite.findOneAndUpdate(
     { userId, recipeId },
     { userId, recipeId },
-    { upsert: true, new: true }
+    { upsert: true, returnDocument: 'after' }
   );
 }
 

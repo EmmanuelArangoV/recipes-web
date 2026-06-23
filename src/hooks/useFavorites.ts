@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import favoriteService from '@/services/favoriteService';
+import type { FavoritePopulatedDTO } from '@/app/types';
 
 export function useFavorites(isAuthenticated: boolean) {
   const [favoriteIds, setFavoriteIds] = useState<Set<string>>(new Set());
@@ -15,7 +16,7 @@ export function useFavorites(isAuthenticated: boolean) {
     setLoading(true);
     favoriteService.getAll()
       .then((res) => {
-        const ids = res.data.data.map((f: any) =>
+        const ids = res.data.data.map((f: FavoritePopulatedDTO) =>
           typeof f.recipeId === 'object' ? f.recipeId._id : f.recipeId
         );
         setFavoriteIds(new Set(ids));

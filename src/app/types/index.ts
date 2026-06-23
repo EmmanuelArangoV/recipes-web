@@ -81,6 +81,20 @@ export interface FavoriteDTO {
   createdAt: string;
 }
 
+export interface FavoritePopulatedDTO {
+  id: string;
+  userId: string;
+  recipeId: {
+    _id: string;
+    title: string;
+    image: string;
+    prepTime: number;
+    difficulty: DifficultyLevel;
+    description: string;
+  };
+  createdAt: string;
+}
+
 // Component Props
 
 export interface RecipeCardProps {

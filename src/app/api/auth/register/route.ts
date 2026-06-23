@@ -15,10 +15,11 @@ export async function POST(req: NextRequest) {
 
     await createUser(name, email, password);
     return NextResponse.json({ message: 'Usuario creado' }, { status: 201 });
-  } catch (err: any) {
-    const isKnown = err?.message === 'El email ya está en uso';
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : '';
+    const isKnown = message === 'El email ya está en uso';
     return NextResponse.json(
-      { error: isKnown ? err.message : 'Error interno del servidor' },
+      { error: isKnown ? message : 'Error interno del servidor' },
       { status: isKnown ? 400 : 500 }
     );
   }
